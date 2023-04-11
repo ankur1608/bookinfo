@@ -30,7 +30,7 @@ docker.withRegistry( '', registryCredential ) {
                     # Construct Image Name
                     IMAGE="$registry:$BUILD_NUMBER" 
 
-                    podman push \${IMAGE} --tls-verify=false
+                    sudo podman push \${IMAGE} --tls-verify=false
                     """
 }
 }
@@ -38,7 +38,7 @@ docker.withRegistry( '', registryCredential ) {
 }
 stage('Cleaning up') {
 steps{
-sh "docker rmi $registry:$BUILD_NUMBER"
+sh "sudo podman rmi $registry:$BUILD_NUMBER"
 }
 }
 }
