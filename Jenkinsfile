@@ -1,7 +1,6 @@
 pipeline {
 environment {
 registry = "docker.io/ankur1308/bookinfo_cicd"
-BUILD_NUMBER = "v1"
 registryCredential = 'ankur_reg_cred'
 dockerImage = ''
 }
@@ -13,7 +12,7 @@ dir('src/productpage') {
 script {
 sh """
 IMAGE="$registry:$BUILD_NUMBER" 
-sudo podman build --no-cache -t \${IMAGE} . 
+sudo podman build -t \${IMAGE} . 
 """
 
 }}
