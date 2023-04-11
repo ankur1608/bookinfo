@@ -10,7 +10,7 @@ stage('Building our image') {
 steps{
 dir('src/productpage') {
 script {
-dockerImage = docker.build registry + ":$BUILD_NUMBER"
+dockerImage = podman.build registry + ":$BUILD_NUMBER"
 }}
 }
 }
@@ -25,7 +25,7 @@ dockerImage.push()
 }
 stage('Cleaning up') {
 steps{
-sh "docker rmi $registry:$BUILD_NUMBER"
+sh "podman rmi $registry:$BUILD_NUMBER"
 }
 }
 }
