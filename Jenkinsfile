@@ -30,7 +30,7 @@ docker.withRegistry( '', registryCredential ) {
                     # Construct Image Name
                     IMAGE="$registry:$BUILD_NUMBER" 
 
-                    sudo podman push docker.io/${IMAGE} --tls-verify=false
+                    sudo podman push docker.io/\${IMAGE} --tls-verify=false
                     """
 }
 }
