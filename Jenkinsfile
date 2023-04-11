@@ -15,6 +15,7 @@ sh """
 IMAGE="$registry:$BUILD_NUMBER" 
 sudo podman build -t \${IMAGE} . 
 """
+dockerImage = ${IMAGE}
 }}
 }
 }
@@ -22,7 +23,7 @@ stage('Deploy our image') {
 steps{
 script {
 docker.withRegistry( '', registryCredential ) {
-IMAGE.push()
+dockerImage.push()
 }
 }
 }
