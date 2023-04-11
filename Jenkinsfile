@@ -41,5 +41,10 @@ steps{
 sh "sudo podman rmi $registry:$BUILD_NUMBER"
 }
 }
+stage('App deploy') {
+steps{
+sh " kubectl --kubeconfig /var/lib/jenkins/k3s_config set image deployment productpage-v1 productpage=$registry:$BUILD_NUMBER"
+}
+}   
 }
 }
