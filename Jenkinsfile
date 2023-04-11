@@ -30,8 +30,6 @@ docker.withRegistry( '', registryCredential ) {
                     # Construct Image Name
                     IMAGE="$registry:$BUILD_NUMBER" 
 
-                    # podman login -u ${USERNAME} -p ${PASSWORD} ${REGISTRY} --tls-verify=false
-
                     podman push \${IMAGE} --tls-verify=false
                     """
 }
