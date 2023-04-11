@@ -1,6 +1,7 @@
 pipeline {
 environment {
 registry = "docker.io/ankur1308/bookinfo_cicd"
+BUILD_NUMBER = "v1"
 registryCredential = 'ankur_reg_cred'
 dockerImage = ''
 }
@@ -10,10 +11,9 @@ stage('Build Image') {
 steps{
 dir('src/productpage') {
 script {
-// dockerImage = docker.build registry + ":$BUILD_NUMBER"
 sh """
 IMAGE="$registry:$BUILD_NUMBER" 
-sudo podman build -t \${IMAGE} . 
+sudo podman build --no-cache -t \${IMAGE} . 
 """
 
 }}
@@ -36,15 +36,15 @@ docker.withRegistry( '', registryCredential ) {
 }
 }
 }
+stage('App deploy') {
+steps{
+sh "kubectl --kubeconfig /var/lib/jenkins/k3s_config set image deployment productpage-v1 productpage=$registry:$BUILD_NUMBER"
+}
+}   
 stage('Cleaning up') {
 steps{
 sh "sudo podman rmi $registry:$BUILD_NUMBER"
 }
 }
-stage('App deploy') {
-steps{
-sh " kubectl --kubeconfig /var/lib/jenkins/k3s_config set image deployment productpage-v1 productpage=$registry:$BUILD_NUMBER"
-}
-}   
 }
 }
