@@ -1,6 +1,6 @@
 pipeline {
 environment {
-registry = "ankur1308/bookinfo_cicd"
+registry = "docker.io/ankur1308/bookinfo_cicd"
 registryCredential = 'ankur_reg_cred'
 dockerImage = ''
 }
@@ -30,7 +30,7 @@ docker.withRegistry( '', registryCredential ) {
                     # Construct Image Name
                     IMAGE="$registry:$BUILD_NUMBER" 
 
-                    sudo podman push docker.io/\${IMAGE} --tls-verify=false
+                    sudo podman push \${IMAGE} --tls-verify=false
                     """
 }
 }
