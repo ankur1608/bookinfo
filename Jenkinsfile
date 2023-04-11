@@ -6,7 +6,7 @@ dockerImage = ''
 }
 agent any
 stages {
-stage('Building our image') {
+stage('Build Image') {
 steps{
 dir('src/productpage') {
 script {
@@ -19,7 +19,7 @@ sudo podman build -t \${IMAGE} .
 }}
 }
 }
-stage('Deploy our image') {
+stage('Push Image to registry') {
 steps{
 script {
 docker.withRegistry( '', registryCredential ) {
