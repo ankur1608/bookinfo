@@ -10,8 +10,11 @@ stage('Building our image') {
 steps{
 dir('src/productpage') {
 script {
-dockerImage = docker.build registry + ":$BUILD_NUMBER"
-// sh 'podman.build registry + ":$BUILD_NUMBER"' 
+// dockerImage = docker.build registry + ":$BUILD_NUMBER"
+sh """
+IMAGE="$registry" + ":$BUILD_NUMBER"' 
+podman build -t \${IMAGE} . 
+"""
 }}
 }
 }
