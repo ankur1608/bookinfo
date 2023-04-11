@@ -13,7 +13,7 @@ script {
 // dockerImage = docker.build registry + ":$BUILD_NUMBER"
 sh """
 IMAGE="$registry:$BUILD_NUMBER" 
-podman build -t \${IMAGE} . 
+sudo podman build -t \${IMAGE} . 
 """
 }}
 }
