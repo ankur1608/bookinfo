@@ -12,7 +12,7 @@ dir('src/productpage') {
 script {
 // dockerImage = docker.build registry + ":$BUILD_NUMBER"
 sh """
-IMAGE="$registry" + ":$BUILD_NUMBER"' 
+IMAGE="$registry" + ":$BUILD_NUMBER" 
 podman build -t \${IMAGE} . 
 """
 }}
