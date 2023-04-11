@@ -14,8 +14,9 @@ script {
 sh """
 IMAGE="$registry:$BUILD_NUMBER" 
 sudo podman build -t \${IMAGE} . 
-"""
 dockerImage = ${IMAGE}
+"""
+
 }}
 }
 }
