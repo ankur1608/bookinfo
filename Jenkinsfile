@@ -19,8 +19,10 @@ sudo podman build -t \${IMAGE} .
 }
 }
 stage('SonarQube Analysis') {
+step  {
 def scannerHome = tool 'sonarqube4.8.0'
 withSonarQubeEnv('sonar_scanner') {
+script  {
 sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube4.8.0/bin/sonar-scanner -D sonar.projectVersion=1.0-SNAPSHOT -D sonar.login=admin      -D sonar.password=Passw0rd@123 \
         -D sonar.projectBaseDir=/var/lib/jenkins/workspace/bookinfo/ \
         -D sonar.projectKey=bookinfo \
@@ -28,6 +30,8 @@ sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarq
         -D sonar.language=python \
         -D sonar.sources=src/productpage \
         -D sonar.host.url=http://jenkin-server.10.25.55.71.nip.io:9000/"""
+}
+}
 }
 }
 stage('Push Image to registry') {
