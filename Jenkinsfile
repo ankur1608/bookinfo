@@ -1,7 +1,7 @@
 pipeline {
 environment {
 registry = "docker.io/ankur1308/bookinfo_cicd"
-registryCredential = 'ankur_reg_cred'
+registryCredential = 'ankur_dockerhub_cred'
 dockerImage = ''
 }
 agent any
