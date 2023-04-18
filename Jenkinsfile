@@ -28,7 +28,7 @@ sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarq
         -D sonar.language=python \
         -D sonar.sources=src/productpage \
         -D sonar.host.url=http://jenkin-server.10.25.55.71.nip.io:9000/"""
-     }
+}
 }
 stage('Push Image to registry') {
 steps{
