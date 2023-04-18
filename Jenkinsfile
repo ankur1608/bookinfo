@@ -19,13 +19,10 @@ sudo podman build -t \${IMAGE} .
 }
 }
 stage('SonarQube Analysis') {
-     def scannerHome = tool 'sonarqube4.8.0'
-      withSonarQubeEnv('sonar_scanner') {
-      sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube4.8.0/bin/sonar-scanner \
-     -D sonar.projectVersion=1.0-SNAPSHOT \
-       -D sonar.login=admin \
-      -D sonar.password=Passw0rd@123 \
-      -D sonar.projectBaseDir=/var/lib/jenkins/workspace/bookinfo/ \
+def scannerHome = tool 'sonarqube4.8.0'
+withSonarQubeEnv('sonar_scanner') {
+sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube4.8.0/bin/sonar-scanner -D sonar.projectVersion=1.0-SNAPSHOT -D sonar.login=admin      -D sonar.password=Passw0rd@123 \
+        -D sonar.projectBaseDir=/var/lib/jenkins/workspace/bookinfo/ \
         -D sonar.projectKey=bookinfo \
         -D sonar.sourceEncoding=UTF-8 \
         -D sonar.language=python \
