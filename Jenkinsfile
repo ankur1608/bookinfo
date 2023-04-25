@@ -18,6 +18,15 @@ sudo podman build -t \${IMAGE} .
 }}
 }
 }
+stage('SonarQube analysis') {
+steps{
+dir('src/productpage') {
+withSonarQubeEnv('sonarqube4.8.0') {
+sh "python productpage.py"
+}
+}
+}
+}
 stage('Push Image to registry') {
 steps{
 script {
