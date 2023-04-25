@@ -24,8 +24,6 @@ stage('Code Quality Check via SonarQube') {
 
        script {
 
-       def scannerHome = tool 'sonarqube4.8.0';
-
            withSonarQubeEnv("sonar_scanner") {
 
            sh "${tool("sonarqube4.8.0")}/src/productpage \
