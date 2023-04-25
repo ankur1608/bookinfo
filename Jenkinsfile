@@ -18,12 +18,26 @@ sudo podman build -t \${IMAGE} .
 }}
 }
 }
-stage('SonarQube analysis') {
+
+stage ("Python Flask Prepare"){
+steps {
+dir('src/productpage') {
+sh "pip3 install -r requirements.txt"
+}
+}
+}
+stage ("Unit Test"){
 steps{
 dir('src/productpage') {
-withSonarQubeEnv('sonar_scanner') {
-sh "pip3 install --no-cache-dir -r test-requirements.txt"
+sh "python3 productpage.py"
 }
+}
+}
+stage ("sonar-publish"){
+steps {
+dir('src/productpage') {
+echo "===========Performing Sonar Scan============"
+sh "${tool("sonarqube4.8.0")}/bin/sonar-scanner"
 }
 }
 }
