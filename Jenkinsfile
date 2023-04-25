@@ -33,7 +33,7 @@ sh "python3 test.py"
 }
 }
 }
-stage ("sonar-publish"){
+stage ("sonar-analysis"){
 steps {
 dir('src/productpage') {
 withSonarQubeEnv('sonar_scanner') { 
