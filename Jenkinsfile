@@ -31,7 +31,7 @@ steps {
 dir('src/productpage') {
 withSonarQubeEnv('sonar_scanner') { 
 echo "===========Performing Sonar Scan============"
-sh "./gradlew sonarqube"
+sh "./python3 sonarqube"
 }
 }
 }
