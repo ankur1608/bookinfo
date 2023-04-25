@@ -22,7 +22,7 @@ stage('SonarQube analysis') {
 steps{
 dir('src/productpage') {
 withSonarQubeEnv('sonar_scanner') {
-sh "pip3 install --no-cache-dir -r test-requirements.txt sonar:sonar"
+sh "pip3 install --no-cache-dir -r test-requirements.txt"
 }
 }
 }
