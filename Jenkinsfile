@@ -22,7 +22,7 @@ sudo podman build -t \${IMAGE} .
 stage ("Python Flask Prepare"){
 steps {
 dir('src/productpage') {
-sh "pip3 install -r requirements.txt"
+sh "pip3 install --no-cache-dir -r test-requirements.txt"
 }
 }
 }
