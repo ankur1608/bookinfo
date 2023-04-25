@@ -38,6 +38,7 @@ steps {
 dir('src/productpage') {
 withSonarQubeEnv('sonar_scanner') { 
 echo "===========Performing Sonar Scan============"
+sh "sonar-scanner -Dsonar.projectKey=bookinfo"
 sh "${tool("sonarqube4.8.0")}/bin/sonar-scanner"
 }
 }
