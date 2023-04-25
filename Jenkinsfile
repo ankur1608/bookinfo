@@ -19,30 +19,20 @@ sudo podman build -t \${IMAGE} .
 }
 }
 
-stage('Code Quality Check via SonarQube') {
-   steps {
-
-       script {
-
-           withSonarQubeEnv("sonar_scanner") {
-
-           sh "${tool("sonarqube4.8.0")}/src/productpage \
-
-           -Dsonar.projectKey=bookinfo \
-
-           -Dsonar.sources=. \
-
-           -Dsonar.host.url=http://jenkins-server.10.25.55.71.nip.io:9000 \
-
-           -Dsonar.login=bookinfo"
-
-               }
-
-           }
-
-       }
-
-   }
+stage ("sonar-analysis"){
+steps {
+dir('src/productpage') {
+withSonarQubeEnv('sonar_scanner') {
+echo "===========Performing Sonar Scan============"
+sh "sonar-scanner \
+  -Dsonar.projectKey=Bookinfo \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://jenkins-server.10.25.55.71.nip.io:9000 \
+  -Dsonar.login=bookinfo"
+}
+}
+}
+}
 stage('Push Image to registry') {
 steps{
 script {
