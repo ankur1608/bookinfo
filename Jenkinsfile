@@ -21,7 +21,7 @@ sudo podman build -t \${IMAGE} .
 stage('SonarQube analysis') {
 steps{
 dir('src/productpage') {
-def scannerHome = tool 'sonarqube4.8.0';
+def scannerHome = tool 'sonarqube4.8.0'
 withSonarQubeEnv('sonar_scanner') {
 sh "${scannerHome}/bin/sonar-scanner"
 }
