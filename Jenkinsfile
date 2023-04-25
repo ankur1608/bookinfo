@@ -29,7 +29,7 @@ sh "pip3 install --no-cache-dir -r test-requirements.txt"
 stage ("Unit Test"){
 steps{
 dir('src/productpage') {
-sh "python3 productpage.py"
+sh "python3 test.py"
 }
 }
 }
