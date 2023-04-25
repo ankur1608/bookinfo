@@ -38,7 +38,7 @@ steps {
 dir('src/productpage') {
 withSonarQubeEnv('sonar_scanner') { 
 echo "===========Performing Sonar Scan============"
-sh "sonar.sources=repo/src/productpage/*.py"
+sh "sonar.sources=*.py"
 sh "sonar.exclusions=**/*"
 }
 }
