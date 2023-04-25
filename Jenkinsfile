@@ -19,23 +19,32 @@ sudo podman build -t \${IMAGE} .
 }
 }
 
-stage ("Python Flask Prepare"){
-steps {
-dir('src/productpage') {
-sh "pip3 install --no-cache-dir -r test-requirements.txt"
-}
-}
-}
-stage ("sonar-analysis"){
-steps {
-dir('src/productpage') {
-withSonarQubeEnv('sonar_scanner') { 
-echo "===========Performing Sonar Scan============"
-sh "./python3 sonarqube"
-}
-}
-}
-}
+stage('Code Quality Check via SonarQube') {
+   steps {
+
+       script {
+
+       def scannerHome = tool 'sonarqube4.8.0';
+
+           withSonarQubeEnv("sonar_scanner") {
+
+           sh "${tool("sonarqube4.8.0")}/src/productpage \
+
+           -Dsonar.projectKey=bookinfo \
+
+           -Dsonar.sources=. \
+
+           -Dsonar.host.url=http://jenkins-server.10.25.55.71.nip.io:9000 \
+
+           -Dsonar.login=bookinfo"
+
+               }
+
+           }
+
+       }
+
+   }
 stage('Push Image to registry') {
 steps{
 script {
