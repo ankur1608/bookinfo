@@ -22,7 +22,7 @@ stage('SonarQube analysis') {
 steps{
 dir('src/productpage') {
 withSonarQubeEnv('sonar_scanner') {
-sh "sonarqube4.8.0/bin/sonar-scanner"
+sh "python3 test.py sonar:sonar"
 }
 }
 }
