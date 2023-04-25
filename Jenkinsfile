@@ -21,7 +21,7 @@ sudo podman build -t \${IMAGE} .
 stage('SonarQube analysis') {
 steps{
 dir('src/productpage') {
-withSonarQubeEnv('sonarqube4.8.0') {
+withSonarQubeEnv('sonar_scanner') {
 sh "python productpage.py"
 }
 }
