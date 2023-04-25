@@ -36,8 +36,10 @@ sh "python3 test.py"
 stage ("sonar-publish"){
 steps {
 dir('src/productpage') {
+withSonarQubeEnv('sonar_scanner') { 
 echo "===========Performing Sonar Scan============"
 sh "${tool("sonarqube4.8.0")}/bin/sonar-scanner"
+}
 }
 }
 }
